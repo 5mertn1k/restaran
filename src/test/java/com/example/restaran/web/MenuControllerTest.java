@@ -30,24 +30,24 @@ class MenuControllerTest {
 
     @Test
     void testGetMenuBySlug() throws Exception {
-        // создаём категорию
+
         Category category = new Category();
         category.setSlug("pizza");
 
-        // создаём блюдо
+
         Dish dish = new Dish();
         dish.setTitle("Пицца Маргарита");
         dish.setCategory(category);
 
-        // говорим моку categoryRepository, что при поиске по slug вернуть категорию
+
         when(categoryRepository.findBySlug("pizza"))
                 .thenReturn(Optional.of(category));
 
-        // говорим моку dishRepository, что при поиске по категории вернуть блюдо
+
         when(dishRepository.findByCategory(category))
                 .thenReturn(List.of(dish));
 
-        // выполняем GET-запрос
+
         mockMvc.perform(get("/api/menu/pizza"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title").value("Пицца Маргарита"));

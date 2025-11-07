@@ -23,13 +23,13 @@ class DishRepositoryTest {
 
     @Test
     void testFindByCategory() {
-        // создаём категорию без ID
+
         Category category = new Category();
         category.setTitle("Тестовая категория");
         category.setSlug("test-category");
-        category = categoryRepository.save(category); // Hibernate сам присвоит id
+        category = categoryRepository.save(category);
 
-        // создаём блюдо
+
         Dish dish = new Dish();
         dish.setTitle("Тестовое блюдо");
         dish.setPrice(500);
@@ -37,10 +37,10 @@ class DishRepositoryTest {
 
         dishRepository.save(dish);
 
-        // ищем блюда по категории
+
         List<Dish> result = dishRepository.findByCategory(category);
 
-        // проверяем результат
+
         assertThat(result)
                 .isNotEmpty()
                 .anyMatch(d -> d.getTitle().equals("Тестовое блюдо"));
