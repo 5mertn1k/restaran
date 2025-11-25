@@ -13,7 +13,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private String lastName;
     private String firstName;
     private String middleName;
